@@ -7,6 +7,12 @@ services:
       - "3001:3001"
     volumes:
       - uptime-kuma-data:/app/data
+    networks:
+      - kuma-network
 
 volumes:
   uptime-kuma-data:
+
+networks:
+  kuma-network:
+    name: uptime-kuma_default
