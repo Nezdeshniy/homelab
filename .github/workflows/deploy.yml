@@ -20,10 +20,13 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -p 2404 -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy Uptime Kuma
+      - name: Deploy
         run: |
           ssh -p 2404 ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
             cd /opt/homelab/uptime-kuma &&
+            docker compose pull &&
+            docker compose up -d &&
+            cd /opt/homelab/nginx &&
             docker compose pull &&
             docker compose up -d
           "
